@@ -16,10 +16,12 @@ module.exports = (app) => {
 
         console.log(conn);
 
-        conn.query('SELECT * FROM livros', () => {
-            console.log(arguments);
+        conn.query('SELECT * FROM livros;', (err, result) => {
+            console.log(result);
+
+            res.render('produtos/lista', {resultado: "teste"} );
+
         });
 
-        res.render('produtos/lista');
     })
 }
