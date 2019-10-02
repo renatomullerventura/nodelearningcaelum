@@ -1,6 +1,4 @@
 module.exports = (app) => {
-
-
     app.get('/produtos', (req, res) => {
 
         const mysql = require('mysql');
@@ -14,14 +12,14 @@ module.exports = (app) => {
             database: 'cdc_project'
         });
 
-        console.log(conn);
-
         conn.query('SELECT * FROM livros;', (err, result) => {
             console.log(result);
 
-            res.render('produtos/lista', {resultado: "teste"} );
+            res.render('produtos/lista', {resultado: result } );
 
         });
-
+    });
+    app.get('/produtos/adicionar', (req, res) => {
+        res.render('produtos/adicionar');
     })
-}
+};

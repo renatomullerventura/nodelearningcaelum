@@ -12,15 +12,45 @@
   </head>
   <body>
       
-      <div class="container">
-          <h1>CDC - Produtos</h1>
-          <%=resultado%>
+    <div class="container">
+        <h1>CDC - Produtos</h1>
+
+        <div class="row">
           <div class="col">
-            <ul>
-                <li>Pragmatic Programer</li>
-                <li>GraphQL</li>
-            </ul>
+            <a href="produtos/adicionar" class="btn btn-success">
+              Adicionar Produto
+            </a>
+          </div>
         </div>
+
+        <div class="row">
+          <div class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Título</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Preço</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% for(var i=0; i < resultado.length; i++) { %>
+                    <tr>
+                      <th>
+                        <img src="https://picsum.photos/id/<%= resultado[i].id %>/50/50" alt="" srcset="">
+                      </th>
+                      <td><%= resultado[i].titulo %></td>
+                      <td><%= resultado[i].descricao %></td>
+                      <td>R$<%= resultado[i].preco %></td>
+                    </tr>
+                  <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <a href="/" class="btn btn-primary">Home</a>
     </div>
 
 
