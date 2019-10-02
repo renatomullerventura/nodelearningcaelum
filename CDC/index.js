@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 })
 
 
-<a href="/" class="btn btn-primary">Home</a>require('./routes/produtos')(app);
+require('./routes/produtos')(app);
 
 
 app.listen(3333, () => {

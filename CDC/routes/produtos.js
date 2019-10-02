@@ -1,16 +1,7 @@
 module.exports = (app) => {
     app.get('/produtos', (req, res) => {
 
-        const mysql = require('mysql');
-
-        // console.log(mysql);
-
-        const conn = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'cdc_project'
-        });
+        const conn = require('../infra/createDbConnection');
 
         conn.query('SELECT * FROM livros;', (err, result) => {
             console.log(result);
@@ -22,4 +13,17 @@ module.exports = (app) => {
     app.get('/produtos/adicionar', (req, res) => {
         res.render('produtos/adicionar');
     })
+    app.post('/produtos/adicionar', (req, res) => {
+        const conn = require('../infra/createDbConnection');
+        
+        console.log(req.body);
+        
+/*
+        conn.query('SELECT * FROM livros;', (err, result) => {
+            console.log(result);
+
+            res.render('produtos/lista', {resultado: result } );
+
+        });*/
+      })
 };

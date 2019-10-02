@@ -11,10 +11,13 @@
     <title>CDC - Produtos!</title>
 
     <style>
-    input:invalid {
-      border-color: red;
-    }
-</style>
+      input:invalid {
+        border-color: red;
+      }
+      label:after {
+        content: attr(data-invalid);
+      }
+    </style>
 
   </head>
   <body>
@@ -23,12 +26,14 @@
         <h1>CDC - Produtos/Adicionar</h1>
 
         <div class="row">
-            <form action="adicionado">
-                <div class="form-group">
-                  <label for="titulo">Título</label>
-                  <input type="text" class="form-control" id="txttitulo" aria-describedby="" 
-                  placeholder="" name="titulo" required >
-                  <small id="smltitulo" class="form-text text-muted">Título do livro.</small>
+            <form method="POST">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" class="form-control" id="txttitulo" aria-describedby="" 
+                    placeholder="" name="titulo" required >
+                    <small id="smltitulo" class="form-text text-muted">Título do livro.</small>
+                  </div>
                 </div>
                 
                 <div class="col">
@@ -43,17 +48,23 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="preco">Preço</label>
-                    <input type="text" class="form-control" id="txt_preco" aria-describedby="" 
+                    <input type="number" class="form-control" id="txt_preco" aria-describedby="" 
                     placeholder="00,00" name="preco" required pattern="^\d+(\.|\,)\d{2}$">
                     <small id="sml_preco" class="form-text text-muted">Digite seu preço sem o R$.</small>
                   </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Adicionar</button>
+                <div class="row">
+                  <div class="col">
+                    <a href="/produtos" class="btn btn-primary">Listagem de produtos</a>
+                  </div>
+                  <div class="col">
+                      <button type="submit" class="btn btn-success">Adicionar</button>
+                    </div>
+                </div>
               </form>
         </div>
 
-        <a href="/produtos" class="btn btn-primary">Listagem de produtos</a>
     </div>
 
 
