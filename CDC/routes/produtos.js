@@ -1,11 +1,9 @@
 module.exports = (app) => {
     app.get('/produtos', (req, res) => {
 
-        const conn = app.infra.createDbConnection();
+        const conn = app.infra.connectionFactory();
 
         const ProdutoDao = app.infra.ProdutoDao;
-
-        console.log(ProdutoDao);
 
         let produtoDao = new ProdutoDao(conn);
 
@@ -16,7 +14,32 @@ module.exports = (app) => {
         conn.end();
     });
 
-    app.get('/produtos/adicionar', (req, res) => {
-        res.render('produtos/adicionar');
+    app.get('/produtos/form', (req, res) => {
+        res.render('produtos/form');
+    });
+
+    app.post('/produtos/form', (req, res) => {
+        // res.render('produtos/detail', req.body);
+        // (req.body);
+
+        const conn = app.infra.connectionFactory();
+
+        const ProdutoDao = app.infra.ProdutoDao;
+
+        let produtoDao = new ProdutoDao(conn);
+
+        let livro = req.body;
+
+        produtoDao.salvar(livro, function (err, result) {
+            res.redirect('/produtos');
+        });
+
+        conn.end();
+
+
+    });
+
+    app.get('/produtos/salvo', (req, res) => {
+        res.redirect('/produtos/salvo');
     });
 };
