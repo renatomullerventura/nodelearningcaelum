@@ -1,29 +1,22 @@
 module.exports = (app) => {
     app.get('/produtos', (req, res) => {
 
-        const conn = require('../infra/createDbConnection');
+        const conn = app.infra.createDbConnection();
 
-        conn.query('SELECT * FROM livros;', (err, result) => {
-            console.log(result);
+        const ProdutoDao = app.infra.ProdutoDao;
 
+        console.log(ProdutoDao);
+
+        let produtoDao = new ProdutoDao(conn);
+
+        produtoDao.lista(function (err, result) {
             res.render('produtos/lista', {resultado: result } );
-
         });
+
+        conn.end();
     });
+
     app.get('/produtos/adicionar', (req, res) => {
         res.render('produtos/adicionar');
-    })
-    app.post('/produtos/adicionar', (req, res) => {
-        const conn = require('../infra/createDbConnection');
-        
-        console.log(req.body);
-        
-/*
-        conn.query('SELECT * FROM livros;', (err, result) => {
-            console.log(result);
-
-            res.render('produtos/lista', {resultado: result } );
-
-        });*/
-      })
+    });
 };
