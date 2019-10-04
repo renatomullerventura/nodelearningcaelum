@@ -10,6 +10,10 @@ ProdutoDao.prototype.salvar = function(livro, callBack) {
     this.connection.query('INSERT INTO livros SET ? ', livro, callBack);
 }
 
+ProdutoDao.prototype.excluir = function(livro, callBack) {
+    this.connection.query('DELETE livros WHERE ? ', livro, callBack);
+}
+
 module.exports = function () {
     return ProdutoDao;
 };

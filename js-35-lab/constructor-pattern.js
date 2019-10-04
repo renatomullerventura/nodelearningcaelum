@@ -18,8 +18,8 @@ Conta.prototype.deposita = function(valor) {
 
 
 let contaJoao = new Conta(1065, 123, 'cc', 20, new Titular('João'));
-let contaPedro = new Conta(1090, 321, 'ci', 10);
-let contaMaria = new Conta(1102, 435, 'cp', 50);
+let contaPedro = new Conta(1090, 321, 'ci', 10, new Titular('Pedro'));
+let contaMaria = new Conta(1102, 435, 'cp', 50, new Titular('Maria'));
 console.log('Saldo => ' + contaMaria.deposita(10));
 
 console.log(contaJoao);
