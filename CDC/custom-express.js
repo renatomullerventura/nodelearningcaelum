@@ -12,6 +12,8 @@ module.exports = function () {
     app.use(bodyParser.urlencoded());
     app.use(expressValidator());
 
+    app.use(bodyParser.json());
+
     load('routes')
         .then('infra')
         .into(app)

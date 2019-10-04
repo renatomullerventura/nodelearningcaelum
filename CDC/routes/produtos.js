@@ -44,8 +44,17 @@ module.exports = (app) => {
 
         const errors = req.validationErrors();
         if (errors) {
-            console.log({ errors: errors, fields: livro });
-            res.render('produtos/form', { errors: errors, fields: livro });
+            console.log('Há erros de validação.');
+            res.format({
+                html: function() {
+                    res.status(400).render('produtos/form', { errors: errors, fields: livro });
+                },
+                json: function() {
+                    res.status(400).send(errors);
+                }
+            })
+            return;
+            // res.render('produtos/form', { errors: errors, fields: livro });
         } else {
             produtoDao.salvar(livro, function (err, result) {
                 res.redirect('/produtos/salvo');
