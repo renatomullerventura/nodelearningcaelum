@@ -1,5 +1,12 @@
+const porta = 3333;
+const http = require('http');
 app = require('./custom-express')();
 
-app.listen(3333, () => {
+
+const servidor = http.Server(app);
+
+const socketio = require('socket.io');
+
+app.listen(porta, () => {
     console.log("Server is running.");
 })

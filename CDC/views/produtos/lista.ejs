@@ -24,37 +24,65 @@
         </div>
 
         <div class="row">
-          <div class="col">
-            <form action="/produtos/deletar" method="DELETE">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% for(var i=0; i < resultado.length; i++) { %>
-                      <tr>
-                        <th>
-                          <img src="https://picsum.photos/id/<%= resultado[i].id %>/50/50" alt="" srcset="">
-                        </th>
-                        <td><%= resultado[i].titulo %></td>
-                        <td><%= resultado[i].descricao %></td>
-                        <td>R$<%= resultado[i].preco %></td>
-                        <td>
-                            <button type="submit" formaction="/">
-                              X
-                            </button>
-                        </td>
-                      </tr>
-                    <% } %>
-                </tbody>
-              </table>
+          <form action="/produtos/buscar" method="post">
+            <div class="col">
+              <div class="form-group">
+                <label for="buscaPor">Procurar</label>
+                <input type="text" class="form-control" id="txt_buscaPor" aria-describedby="" placeholder="Livro" name="buscapor">
+                <small id="sml_buscaPor" class="form-text text-muted">Digita uma característica do produto para efetuar a busca.</small>
+              </div>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-primary">
+                Buscar
+              </button>
+            </div>
           </form>
+          <form action="/promocao" method="post">
+            <div class="col">
+              <div class="form-group">
+                <label for="buscaPor">Promoção</label>
+                <input type="text" class="form-control" id="txt_buscaPor" aria-describedby="" placeholder="Livro" name="msg">
+                <small id="sml_buscaPor" class="form-text text-muted">Promoção.</small>
+              </div>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-primary">
+                Enviar
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Título</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                  <% for(var i=0; i < resultado.length; i++) { %>
+                    <tr>
+                      <th>
+                        <img src="https://picsum.photos/id/<%= resultado[i].id %>/50/50" alt="" srcset="">
+                      </th>
+                      <td><%= resultado[i].titulo %></td>
+                      <td><%= resultado[i].descricao %></td>
+                      <td>R$<%= resultado[i].preco %></td>
+                      <td>
+                          <a href="/produtos/deleta/<%= resultado[i].id%>" class="btn btn-danger">
+                            Excluir
+                          </a>
+                      </td>
+                    </tr>
+                  <% } %>
+              </tbody>
+            </table>
           </div>
         </div>
 

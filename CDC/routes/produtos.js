@@ -9,6 +9,40 @@ module.exports = (app) => {
 
         produtoDao.lista(function (err, result) {
             // content negociation
+            res
+            // .header("Access-Controll-Allow-Origin", "*")
+            .format({
+                html: function() {
+                    res.render('produtos/lista', {resultado: result } );
+                },
+                json: function() {
+                    res.json(result);
+                }
+            });
+        });
+
+        conn.end();
+    });
+
+    app.get('/produtos/buscar', (req, res) => {
+        res.redirect('/produtos');
+    })
+
+    app.post('/produtos/buscar', (req, res) => {
+
+        const conn = app.infra.connectionFactory();
+
+        const ProdutoDao = app.infra.ProdutoDao;
+
+        let produtoDao = new ProdutoDao(conn);
+
+        let campo = req.body;
+
+        produtoDao.busca({
+            titulo: campo.buscapor,
+            descricao: campo.buscapor
+        }, function (err, result) {
+            // content negociation
             res.format({
                 html: function() {
                     res.render('produtos/lista', {resultado: result } );
@@ -70,8 +104,10 @@ module.exports = (app) => {
         res.render('produtos/salvo');
     });
 
-    app.delete('/produtos/deletar', (req, res) => {
-        let livro = req.body;
+    app.get('/produtos/deleta/:id', (req, res) => {
+        let livro = {
+            id: req.params.id
+        };
 
         const conn = app.infra.connectionFactory();
 
@@ -79,11 +115,11 @@ module.exports = (app) => {
 
         let produtoDao = new ProdutoDao(conn);
 
-        produtoDao.excluir(livro, function (err, result) {
-            res.redirect('/produtos/lista');
+        produtoDao.busca(livro, function (err, result) {
+            console.log(result);
+            res.render('produtos/deleta', {fields: result});
         });
 
         conn.end();
-        
     });
 };
